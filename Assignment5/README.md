@@ -1,3 +1,3 @@
-#Assignment 5
+#Assignment5
 
 Planarity, Euler's Theorem and inequalities
