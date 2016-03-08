@@ -1,0 +1,276 @@
+% ======================= Pre-Amble =========================
+      
+%Format
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format 
+                     						%imports package {article} and specify option(s) [11pt, oneside]
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots. 
+    \geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+    %\geometry{landscape}                		% Activate for rotated page geometry
+
+\usepackage[parfill]{parskip}    		        % Activate to begin paragraphs with an empty line rather than an indent
+
+    %Colours
+    \usepackage{graphicx, subcaption}
+    \usepackage[usenames, dvipsnames]{color}     % font colour:    \textcolor{<colour>}{text}
+          									%highlight text:  \colorbox{<color>}{text}
+    \usepackage{soul}						%highlight text: \hl{}     %only  yellow								
+    									%list of colours: https://www.sharelatex.com/learn/Using_colours_in_LaTeX
+    									
+    %Bullets
+    \usepackage{enumerate}     %specify type of enumeration: \being{enumerate}[<type of enumeration>]
+    
+    %Footnote Spacing
+    \setlength{\footnotesep}{0.4cm}                  %specify spacing b/w footnotes
+    \setlength{\skip\footins}{0.6cm}                    % space b/w footnotes and textbody
+
+
+%Mattematics
+    %American Mathematics Society packages
+    \usepackage{amsmath}	   %math
+    \usepackage{amssymb}       %symbols
+    \usepackage{amsthm}          %theorems
+
+    %QED
+    \newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}         %make qed filled square:    \QEDA
+    \newcommand*{\QEDB}{\hfill\ensuremath{\square}}               %make qed empty square: \QEDB 
+    
+    \renewcommand\qedsymbol{\ensuremath{\blacksquare}}		%Proof environment
+
+
+%Figures
+\usepackage{caption}
+\captionsetup[figure]{labelfont=bf}    %make figure labels boldface
+\captionsetup[table]{labelfont=bf}     %make table labels boldface
+
+\usepackage[hidelinks]{hyperref}                % Allows for clickable references
+
+    %Tables
+    \usepackage[none]{hyphenat}                    % Stops breaking-up words in a table (i.e. no hyphens)                                                             
+    
+    \usepackage{array}   
+        \newcolumntype{x}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}       %center fixed column width: x{<len>}                      
+        \newcolumntype{$}{>{\global\let\currentrowstyle\relax}}                                                   % let us apply things (e.g. bold/italicize) to entire row            
+        \newcolumntype{^}{>{\currentrowstyle}}
+        \newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1} #1\ignorespaces}
+    
+    %Images
+    \graphicspath{ {images/} }                          %directory that your images are located in within your current directory
+    
+    %Diagrams
+    \usepackage[latin1]{inputenc}
+    \usepackage{tikz}
+    	\tikzset{line/.style={-latex'}}
+        \usepackage{tkz-berge}
+        \usetikzlibrary{shapes,arrows}
+        \usetikzlibrary{patterns}			%Specify colours of stuff (e.g. vertices): 
+        								%	-> set style: \tikzset{VertexStyle/.append style = {minimum size = 8pt, inner sep = 0pt}} 
+								%	-> change individual vertices: \AddVertexColor{white}{1,2} 
+
+
+%Bibliography
+\usepackage[numbers,sort&compress]{natbib}   %for multiple references: sorts  (i.e. [1,2] NOT [2, 1] )
+                                           				  %                                     compresses (i.e. [1-3] )
+\usepackage[nottoc]{tocbibind}                            %add bibliography to table of contents
+
+
+%Miscellaneous
+\usepackage{dirtytalk}    %quotations: use \say  
+
+
+%================== Header & Footer =========================
+\usepackage{fancyhdr}
+\usepackage{lastpage}      %ensures you can reference LastPage (i.e. Page 2 of 10)
+
+\renewcommand{\headrulewidth}{0.4pt}		%Decorative Header line: thickness={0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}		%Decorative Footer line: thickness={0.4pt}
+
+\setlength{\headheight}{13.6pt} 		%space b/w top of page & header
+\setlength{\headsep}{0.3in}		%space b/w page header and body
+
+%Make Header & Footer    
+\pagestyle{fancy}
+    \lhead{Stephanie Knill} 		% controls the left corner of the header
+    \chead{} 					% controls the center of the header
+    \rhead{} 					% controls the right corner of the header
+    \lfoot{} 					% controls the left corner of the footer
+    \cfoot{Page~\thepage\ of \pageref{LastPage}} 				% controls the center of the footer
+    												%Page~\thepage\  if just want Page x
+    \rfoot{}			 		% controls the right corner of the footer
+
+% =============================== Document ===================================
+\begin{document}
+
+% Title Page
+\title{MATH 442 --- Assignment 8 \\
+\line(1,0){360} \\              %(slope x, y){length of line}
+}
+\author{
+Stephanie Knill \\
+54882113 \\
+Due: March 10, 2016}
+
+\date{}                   % Activate:  display a given date (e.g. {August 4} ) or no date (empty {} )
+                                    %No activate: display current date
+\maketitle
+
+%\thispagestyle{empty}                   %Remove header from this (first) page. Change empty -> plain to keep numbering
+%								-> Doesn't matter in this case (b/c title page)
+%\cleardoublepage
+
+
+% ================= Questions ================
+
+\section*{Question 43}
+
+Let $G$ be a simple graph with at least one edge. Then the sum of the coefficients of the chromatic polynomial $P_G(k)$ is 0.
+\begin{proof}
+We will proceed by induction on the number of vertices $v$.
+
+\textbf{Base Case:} For a simple graph $G$ of $v=2$ vertices with at least one edge (Figure \ref{base case}) we have
+\begin{figure}[h]           
+            \centering
+            \begin{tikzpicture}[scale=0.75,transform shape]
+        		
+        		\GraphInit[vstyle=Classic]					%Make vertice labels outside it
+        		%\SetVertexNoLabel							%No vertice labels
+        		\tikzset{VertexStyle/.append style = {fill=black, circle}}		%Set vertex style        		
+			\Vertex [x=0,y=0, L= $k$]{1}
+			\Vertex [x=3, y=0, L=$k-1$]{2}
+        		%\AddVertexColor{white}{1,2} 					%Change individual vertex type
+            
+        			\path [thick] (1) edge (2);
+
+            \end{tikzpicture}
+            \caption{Base case of $v=2$ vertices.}
+            \label{base case}
+\end{figure}
+
+the chromatic polynomial $P_G(k) = k\cdot(k-1) = k^2-k$. Here the coefficients are 1 and -1, which sum to 0.
+
+\textbf{Induction Step:} Let us assume the statement holds true for $v=k$ vertices. Then for a graph $G$ of $k$ vertices, we have its chromatic polynomial $P_G(k)$ coefficients sum to 0. 
+
+For a graph $G'$ of $v=k+1$ vertices, the chromatic polynomial is
+\begin{align*}
+	P_{G'}(k) = P_G(k)\cdot (k-i)
+\end{align*}
+where $i$ represents the number of edges between our new vertex and our graph $G$. By the induction assumption, the coefficients of $P_G(k)$ sums to 0. Multiplying this by $(k-i)$ will similarly yield the sum of coefficients to be 0. Thus, the statement holds true for $v=k+1$, and the proof of the induction step is complete.
+
+\textbf{Conclusion:} By the principle of induction,  the statement is true for all $n \in \mathbb{N}$.
+\end{proof}
+
+\section*{Question 44}
+
+\emph{Try to prove the four colour theorem by adapting the proof of the five colour theorem from class}
+
+\begin{proof}
+We will proceed by induction on the number of vertices $V$ in a graph $G$.
+
+\textbf{Base Case:} For $V=1$ we have a single vertex, which is 4-colourable.
+
+\textbf{Induction Step:} Assume all simple connected planar graphs with up to $n-1$ vertices are 4-colourable.
+
+Suppose $G$ is a simple graph connected planar graph with $n$ vertices. Then we know that $G$ has a vertex $v$ of degree less than or equal to 5.
+
+Let us examine the case where deg($v) < 4$. Here, the proof follows exactly with the in-class proof and we find that $G$ is 4-colourable
+
+For the case of deg($v) =4$, we cannot say that all vertices surrounding $v$ are \textit{not} adjacent, since the non-planar subgraph $K_5$ does not arise. Since our graph will remain planar even if all vertices are adjacent (we would have the planar $K_4$ subgraph) our five colour theorem proof breaks down here when we try to extend it to the four colour theorem.
+\end{proof}
+
+\section*{Question 45}
+
+A graph $G$ is $k$-critical if $\chi(G)=k$ and the deletion of any vertex yields a graph with a smaller chromatic number. 
+
+\textbf{Proposition:} If $G$ is $k$-critical, then every vertex has degree at least $k-1$.
+
+\begin{proof}
+Assume to the contrary that $G$ is $k$-critical and there exists a vertex $v$ of at most $k-2$ degree. Since $G$ is $k$-critical, the graph $G-v$ can be coloured with $k-1$ colours. Inserting vertex $v$ back in, we see that at least one of the $k-1$ colours is not adjacent to $v$. Colouring $v$ this gives us a $k-1$ colouring of the graph $G$, thereby giving us the necessary contradiction.
+
+
+
+%Assume that $G$ is $k$-critical. Then every vertex in the graph must be of a different colour, otherwise the deletion of a single vertex would not result in a new graph with a smaller chromatic number. This means we have $k$ vertices, all of which are adjacent to another. In the case where $G$ is simple, we have the complete graph $K_k$, where each vertex has degree $k-1$. If $G$ is not simple, we will have the complete graph $K_k$ but we will also have multiple edges or loops. In this case, all vertices will have degree $k-1$ or greater.
+
+\end{proof}
+
+
+\section*{Question 46}
+
+An example graph that is both 3-colourable($f$) and 3-colourable is the null graph of one vertex $N_1$ (Figure \ref{N1}).
+
+\begin{figure}[h]           
+            \centering
+            \begin{tikzpicture}[scale=0.75,transform shape]
+        		
+        		\GraphInit[vstyle=Classic]					%Make vertice labels outside it
+        		\SetVertexNoLabel							%No vertice labels
+        		\tikzset{VertexStyle/.append style = {fill=pink, circle}}		%Set vertex style        		
+			\Vertex [x=0,y=0]{1}
+        		%\AddVertexColor{white}{1,2}
+
+            \end{tikzpicture}
+            \caption{Null graph $N_1$ which is both 3-colourable($f$) and 3-colourable.}
+            \label{N1}
+\end{figure}
+
+
+
+
+\section*{Question 47}
+
+For the edge colouring of the hypercube $Q_k$ of $k$ colours, the chromatic index is
+$$\chi'(Q_k)= k$$
+
+\begin{proof}
+
+We will proceed by induction on $k$.
+
+\textbf{Base Case:} For $k=1$, we have $Q_1$ which consists of 2 vertices joined by a single edge.
+
+\begin{figure}[h]           
+            \centering
+            \begin{tikzpicture}[scale=0.75,transform shape]
+        		
+        		\GraphInit[vstyle=Classic]					%Make vertice labels outside it
+        		\SetVertexNoLabel							%No vertice labels
+        		\tikzset{VertexStyle/.append style = {fill=black, circle}}		%Set vertex style        		
+			\Vertex [x=0,y=0]{1}
+			\Vertex [x=3, y=0]{2}
+        		%\AddVertexColor{white}{1,2} 					%Change individual vertex type
+            
+        			\path [thick, pink] (1) edge (2);
+
+            \end{tikzpicture}
+            \caption{Hypercube $Q_1$.}
+            \label{Q1}
+\end{figure}
+Here, we can colour our edge with 1 colour, namely pink\footnote{Or in Stephanie's words, "PINKKKKK!"}.
+
+\textbf{Induction Step}: assume the proposition holds true for a $n$-dimensional hypercube $Q_n$, where $1 < k \leq n$. For notation purposes, let a sequence of 0's of length $m$ be denoted by $0^m$ and a sequence of 1's of length $m$ be denoted by $1^m$ (for example, $0^m$ where $m=3$ would be the vertex 000). 
+
+For the hypercube $Q_{n+1}$, we can imagine it as two separate cycles $0v$ and $1v$, where $v$ is the set of all possible permutations of 0's and 1's of length $n$, with a single edge joining the corresponding vertices in $0v$ and $1v$. Since we can colour $Q_n$ with $n$ colours, then we can colour $0v$ and $1v$ with $n$ colours. Using our $(n+1)$-th colour, we can colour the edges joining $0v$ to $1v$, thereby allowing us to colour $Q_{n+1}$ with $n+1$ colours. This gives us a chromatic number $\chi'(Q_{k+1}) = k+1$ and the proof of the induction step is complete.
+
+\textbf{Conclusion:} By the principle of induction,  the statement is true for all $k \in \mathbb{N}$.
+	
+\end{proof}
+
+
+
+
+\section*{Question 48}
+
+\emph{Let $G$ be a simple graph with an odd number of vertices. If $G$ is regular of degree $d\geq 2$, then $\chi'(G)=d+1$.}
+
+\begin{proof}
+Assume that $G$ is a simple graph with an odd number of vertices, of which are regular of degree $d\geq 2$. By Vizing's Theorem, the chromatic index $\chi'(G)$ is $d$ or $d+1$. Let us show that $X'(G) \neq d$.
+
+Assume to the contrary that $X'(G) = d$. Since $G$ has an odd number of vertices and the sum of all vertex degrees is even, then $d$ must be even. For a $G$ of even regular degree, the largest number of edges of the same colour is $d/2$, otherwise the edges would emerge from over half the number of vertices and meet up. Then $G$ has at most
+$$\frac{d}{2} \cdot \chi'(G) = \frac{n \cdot d}{2}$$
+edges. Since $\chi'(G)=d$, we have that
+\begin{align*}
+	\chi'(G) & = n \\
+	d & = n
+\end{align*}
+However, $d$ is even but we have know that the number of vertices $n$ is odd. Thus we have a contradiction and the chromatic index cannot be $d$. Therefore the chromatic index of $G$ is $\chi'(G)=d+1$.
+\end{proof}
+
+
+\end{document} 
