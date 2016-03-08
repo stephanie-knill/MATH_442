@@ -230,7 +230,7 @@ by our induction assumption. Adding our vertex $v$ back in, we can assign it $k-
 
 \section*{Question 40}
 
-The windmill graph $Wd(n, N)$ on $N(n ? 1) + 1$ vertices is the connected simple graph formed by taking $N$ copies of $K_n$ and joining them at a common vertex. 
+The windmill graph $Wd(n, N)$ on $N(n - 1) + 1$ vertices is the connected simple graph formed by taking $N$ copies of $K_n$ and joining them at a common vertex. 
 
 \textbf{Proposition:}  The chromatic polynomial of the windmill graph $Wd(n, N)$ is $$P_{Wd(n,N)} = k \prod_{i=1}^{n-1} (k-i)^N$$
 
@@ -243,7 +243,7 @@ Now let us look at each $K_n$ copy separately. Since we have already coloured on
 	\end{align*}
 However, we have $N$ copies of each of these components, so we must multiply the chromatic number of each copy by the chromatic number of all other copies.
 $$\prod_{i=1}^{n-1} (k-i)^N$$
-Combining this with our common vertex coloured $k$ ways gives us the chromatic polynomial of our windmill graph
+Multiplying this by our common vertex coloured $k$ ways gives us the chromatic polynomial of our windmill graph
  $$P_{Wd(n,N)} = k \prod_{i=1}^{n-1} (k-i)^N$$
 \end{proof}
 
@@ -255,9 +255,9 @@ Combining this with our common vertex coloured $k$ ways gives us the chromatic p
 
 \begin{proof}
 
-We will proceed by induction on the number of edges.
+We will proceed by induction on the number of edges $m$.
 
-\textbf{Base Case:} $e=0$
+\textbf{Base Case:} $m=0$
 
 Here we have a null graph of n vertices. Thus the chromatic polynomial of the null graph $G$ of $n$ vertices is
 	\begin{align*}
