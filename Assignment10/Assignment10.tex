@@ -326,12 +326,13 @@ Assume to the contrary that such a graph exists. Since we cannot form cycles, le
 Since this is a tree, none of the edges from these four vertices can connect back to $v_1, v_2, v_3$ or $v_4$. Thus we must attach a new vertex on the ends of each of them. However we have 9 edges which will result in a total of 13 vertices in $T$, thereby giving us the necessary contradiction.
 \end{proof}
 
+\cleardoublepage
 
 \section*{Question 60}
 
-How many labelled trees exist with 6 vertices such that the degree of ever vertex is 1 or 3?
+\emph{How many labelled trees exist with 6 vertices such that the degree of ever vertex is 1 or 3?}
 
-Since we can only have vertices of degree 1 or 3, this gives us one possible configuration: two vertices of degree 3 attached with vertices of degree 1 on the remaining edges (Figure \ref{q60}).
+Since we can only have vertices of degree 1 or 3, this gives us one possible configuration: two vertices of degree 3 attached with vertices of degree 1 on the remaining edges (Figure \ref{q60}). If we were to have less vertices of degree 3---in this case, zero or one---we will have less than 6 vertices total. If we were to have greater than two vertices of degree 3, we will have more than 6 vertices. Thus we can only have a configuration with exactly two vertices of degree 3.
 
 \begin{figure}[h]
 	\centering
@@ -356,7 +357,124 @@ Since we can only have vertices of degree 1 or 3, this gives us one possible con
         \caption{Graph of 6 vertices with vertices of degree 1 or 3.}
         \label{q60}
 	\end{figure}
+	
+Let us first fix the labels of the vertices of degree 1. Since we can rotate about the vertices of degree 3 and flip the graph about its line of symmetry in the $y$-axis, two graphs are isomorphic if they have the same labels attached to a vertex of degree 3. Let the possible labels be 1, 2, 3, and 4. Then for labels $i,j$, where $i\neq j$ and $i,j \in \{1,2,3,4\}$, we must assign each $i$ and $j$ such that they are adjacent to the same vertex of degree 3 and adjacent to different vertices of degree 3. This gives us 3 possible configurations (Figure \ref{q60}) for the fixing of the labels for vertices of degree 1.
 
-\hl{ask stephanie: isomorphic or non-isomorphic???}
+ \begin{figure}[h]
+    \centering
+    
+    \begin{subfigure}[b]{0.3\columnwidth}             
+    \centering
+      \begin{tikzpicture}[scale=0.6,transform shape]
+			\Vertex [x=-2, y=2,L=1]{3}
+			\Vertex [x=-2, y=-2,L=2]{4}
+			\Vertex [x=4, y=2,L=3]{5}
+			\Vertex [x=4, y=-2,L=4]{6}
+			\SetVertexNoLabel	
+			\Vertex [x=0,y=0]{1}
+			\Vertex [x=2, y=0]{2}
+    		
+		\path [solid] (1) edge (2);					%arrows: [line];     label: {$label}$
+		\path [solid] (1) edge (3);
+		\path [solid] (1) edge (4);
+		\path [solid] (2) edge (5);
+		\path [solid] (2) edge (6);
+      \end{tikzpicture}
+      \caption{Configuration 1}
+      \label{A}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\columnwidth}
+      \centering
+      \begin{tikzpicture}[scale=0.6,transform shape]
+			\Vertex [x=-2, y=2,L=1]{3}
+			\Vertex [x=-2, y=-2,L=3]{4}
+			\Vertex [x=4, y=2,L=2]{5}
+			\Vertex [x=4, y=-2,L=4]{6}
+			\SetVertexNoLabel	
+			\Vertex [x=0,y=0]{1}
+			\Vertex [x=2, y=0]{2}
+    		
+		\path [solid] (1) edge (2);					%arrows: [line];     label: {$label}$
+		\path [solid] (1) edge (3);
+		\path [solid] (1) edge (4);
+		\path [solid] (2) edge (5);
+		\path [solid] (2) edge (6);
+      \end{tikzpicture}
+      \caption{Configuration 2}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\columnwidth}
+      \centering
+      \begin{tikzpicture}[scale=0.6,transform shape]
+			\Vertex [x=-2, y=2,L=1]{3}
+			\Vertex [x=-2, y=-2,L=4]{4}
+			\Vertex [x=4, y=2,L=2]{5}
+			\Vertex [x=4, y=-2,L=3]{6}
+			\SetVertexNoLabel	
+			\Vertex [x=0,y=0]{1}
+			\Vertex [x=2, y=0]{2}
+    		
+		\path [solid] (1) edge (2);					%arrows: [line];     label: {$label}$
+		\path [solid] (1) edge (3);
+		\path [solid] (1) edge (4);
+		\path [solid] (2) edge (5);
+		\path [solid] (2) edge (6);
+    	\end{tikzpicture}
+    	\caption{Configuration 3}
+    \end{subfigure}
+    \caption{Possible configurations for the fixing of the labels for vertices of degree 1.}
+    \label{q60}
+    \end{figure}
+
+Now, let us fix the labels for the two vertices of degree 3. Although we have a line of symmetry about the y-axis along the edge adjacent to our two vertices of degree 3, switching the assigned labels for these vertices will yield non-isomorphic graphs (Figure \ref{q60 swap}). Thus for each of the remaining labels, we have 2 possible arrangements.
+
+ \begin{figure}[h]
+    \centering
+    
+    \begin{subfigure}[b]{0.4\columnwidth}             
+    \centering
+      \begin{tikzpicture}[scale=0.7,transform shape]
+			\Vertex [x=-2, y=2,L=1]{3}
+			\Vertex [x=-2, y=-2,L=2]{4}
+			\Vertex [x=4, y=2,L=3]{5}
+			\Vertex [x=4, y=-2,L=4]{6}	
+			\Vertex [x=0,y=0,L=5]{1}
+			\Vertex [x=2, y=0,L=6]{2}
+    		
+		\path [solid] (1) edge (2);					%arrows: [line];     label: {$label}$
+		\path [solid] (1) edge (3);
+		\path [solid] (1) edge (4);
+		\path [solid] (2) edge (5);
+		\path [solid] (2) edge (6);
+      \end{tikzpicture}
+      \caption{Configuration 1}
+      \label{A}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.4\columnwidth}
+      \centering
+      \begin{tikzpicture}[scale=0.7,transform shape]
+			\Vertex [x=-2, y=2,L=1]{3}
+			\Vertex [x=-2, y=-2,L=2]{4}
+			\Vertex [x=4, y=2,L=3]{5}
+			\Vertex [x=4, y=-2,L=4]{6}
+			\Vertex [x=0,y=0,L=6]{1}
+			\Vertex [x=2, y=0,L=5]{2}
+    		
+		\path [solid] (1) edge (2);					%arrows: [line];     label: {$label}$
+		\path [solid] (1) edge (3);
+		\path [solid] (1) edge (4);
+		\path [solid] (2) edge (5);
+		\path [solid] (2) edge (6);
+      \end{tikzpicture}
+      \caption{Configuration 2}
+    \end{subfigure}
+    \caption{Swapping labels for the vertices of degree 3 yields non-isomorphic graphs.}
+    \label{q60 swap}
+    \end{figure}
+
+However,  for the remaining vertices we have 6 different labels for which we must choose 2. This gives us ${6 \choose 2}=15$ possibilities. Multiplying all of these togethers gives us a total of
+$$3 \cdot 2 \cdot 15 = 90$$
+non-isomorprhic labelled trees with 6 vertices of degree 1 or 3.
+
+
 
 \end{document} 
