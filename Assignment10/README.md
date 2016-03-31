@@ -1,3 +1,3 @@
 # Assignment 10
 
-Trees
+Spanning trees, Prufer sequences
